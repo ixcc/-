@@ -3,8 +3,51 @@ package day;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 无重复字符的最长子串/数组
+ */
 public class day3 {
 
+    /**
+     * 最长无重复子数组
+     * 输入：[1,2,3,1,2,3,2,2]
+     * 返回值：3
+     * 说明：最长子数组为[1,2,3]
+     * @param arr
+     * @return
+     */
+    public static int maxLength (int[] arr) {
+        // write code here
+        if (arr.length <= 1) {
+            return arr.length;
+        }
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(arr[0], 0);
+        int left = 0, right = 1;
+        int count = 0;
+        while (left <= right && right < arr.length) {
+            if (map.containsKey(arr[right]) && map.get(arr[right])  >= left) {
+                left = map.get(arr[right]) + 1;
+                map.put(arr[right], right);
+            } else {
+                map.put(arr[right], right);
+            }
+            if (count < right - left) {
+                count = right - left;
+            }
+            right++;
+        }
+        return count + 1;
+    }
+
+    /**
+     * 无重复字符的最长子串
+     * 输入: s = "abcabcbb"
+     * 输出: 3
+     * 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+     * @param s
+     * @return
+     */
     public int lengthOfLongestSubstring(String s) {
         // 特殊情况处理
         if (s.length() == 0 || s.length() == 1) {
