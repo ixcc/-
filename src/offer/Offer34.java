@@ -2,6 +2,9 @@ package offer;
 
 import java.util.*;
 
+/**
+ * 二叉树根节点到叶子节点和为指定值的路径
+ */
 public class Offer34 {
 
     // 定义全局List存储二维数组
