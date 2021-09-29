@@ -2,6 +2,9 @@ package offer;
 
 import java.util.*;
 
+/**
+ * 从上到下打印二叉树
+ */
 public class Offer31III {
 
     public static void main(String[] args) {
@@ -38,6 +41,11 @@ public class Offer31III {
         return array;
     }
 
+    /**
+     * 双端队列
+     * @param root
+     * @return
+     */
     public List<List<Integer>> levelOrder2(TreeNode root){
         List<List<Integer>> array = new ArrayList<>();
         Deque<TreeNode> deque = new LinkedList<>();
@@ -61,6 +69,49 @@ public class Offer31III {
                 }
             }
             array.add(list);
+        }
+        return array;
+    }
+
+    /**
+     * 两个栈记录从左到右和从右到左的节点
+     * @param pRoot
+     * @return
+     */
+    public ArrayList<ArrayList<Integer> > Print(TreeNode pRoot) {
+        ArrayList<ArrayList<Integer>> array = new ArrayList<ArrayList<Integer>>();
+        if (pRoot == null) {
+            return array;
+        }
+        Stack<TreeNode> stackLeft = new Stack<TreeNode>();
+        Stack<TreeNode> stackRight = new Stack<TreeNode>();
+        stackLeft.add(pRoot);
+        while (!stackLeft.isEmpty() || !stackRight.isEmpty()) {
+            ArrayList<Integer> arr = new ArrayList<Integer>();
+            if (!stackLeft.isEmpty()) {
+                while (!stackLeft.isEmpty()) {
+                    TreeNode node = stackLeft.pop();
+                    arr.add(node.val);
+                    if (node.left != null) {
+                        stackRight.add(node.left);
+                    }
+                    if (node.right != null) {
+                        stackRight.add(node.right);
+                    }
+                }
+            } else {
+                while (!stackRight.isEmpty()) {
+                    TreeNode node = stackRight.pop();
+                    arr.add(node.val);
+                    if (node.right != null) {
+                        stackLeft.add(node.right);
+                    }
+                    if (node.left != null) {
+                        stackLeft.add(node.left);
+                    }
+                }
+            }
+            array.add(arr);
         }
         return array;
     }
