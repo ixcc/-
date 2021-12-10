@@ -7,6 +7,7 @@ public class day1816 {
 
     /**
      * stringbuffer追加
+     *
      * @param s
      * @param k
      * @return
@@ -31,6 +32,7 @@ public class day1816 {
 
     /**
      * substring
+     *
      * @param s
      * @param k
      * @return
